@@ -1,0 +1,1 @@
+disease_name,phenotype_label,age_min_months,age_max_months,setting,region,sensitivity,specificity,lr_pos,lr_neg,source_pmid,guideline_org,year,study_design,evidence_grade,extraction_date,notes

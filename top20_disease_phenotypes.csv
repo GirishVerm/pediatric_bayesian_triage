@@ -1,0 +1,102 @@
+disease_name,snomed_fsn,snomed_id,phenotype_label,hpo_id,age_min_months,age_max_months,setting,notes
+Acute otitis media,,,Ear pain,,,,,,
+Acute otitis media,,,Ear pulling/tugging,,,,,,
+Acute otitis media,,,Fever,,,,,,
+Acute otitis media,,,Otorrhea (ear discharge),,,,,,
+
+Acute upper respiratory infection (common cold),,,Cough,,,,,,
+Acute upper respiratory infection (common cold),,,Rhinorrhea (runny nose),,,,,,
+Acute upper respiratory infection (common cold),,,Nasal congestion,,,,,,
+Acute upper respiratory infection (common cold),,,Sore throat,,,,,,
+Acute upper respiratory infection (common cold),,,Low-grade fever,,,,,,
+
+Bronchiolitis,,,Cough,,,,,,
+Bronchiolitis,,,Wheezing,,,,,,
+Bronchiolitis,,,Tachypnea (rapid breathing),,,,,,
+Bronchiolitis,,,Chest retractions,,,,,,
+Bronchiolitis,,,Hypoxemia (low oxygen),,,,,,
+
+Asthma exacerbation,,,Wheezing,,,,,,
+Asthma exacerbation,,,Dyspnea (shortness of breath),,,,,,
+Asthma exacerbation,,,Cough,,,,,,
+Asthma exacerbation,,,Chest tightness,,,,,,
+
+Community-acquired pneumonia,,,Fever,,,,,,
+Community-acquired pneumonia,,,Cough,,,,,,
+Community-acquired pneumonia,,,Tachypnea (rapid breathing),,,,,,
+Community-acquired pneumonia,,,Pleuritic chest pain,,,,,,
+Community-acquired pneumonia,,,Crackles on auscultation,,,,,,
+
+Influenza,,,Fever,,,,,,
+Influenza,,,Myalgia (muscle aches),,,,,,
+Influenza,,,Cough,,,,,,
+Influenza,,,Headache,,,,,,
+Influenza,,,Malaise/fatigue,,,,,,
+
+Croup (laryngotracheobronchitis),,,Barking cough,,,,,,
+Croup (laryngotracheobronchitis),,,Stridor,,,,,,
+Croup (laryngotracheobronchitis),,,Hoarseness,,,,,,
+Croup (laryngotracheobronchitis),,,Fever,,,,,,
+
+Streptococcal pharyngitis,,,Sore throat,,,,,,
+Streptococcal pharyngitis,,,Fever,,,,,,
+Streptococcal pharyngitis,,,Tonsillar exudate,,,,,,
+Streptococcal pharyngitis,,,Tender anterior cervical lymph nodes,,,,,,
+Streptococcal pharyngitis,,,Absence of cough,,,,,,
+
+Acute bacterial sinusitis,,,Nasal discharge (purulent),,,,,,
+Acute bacterial sinusitis,,,Facial pain/pressure,,,,,,
+Acute bacterial sinusitis,,,Nasal congestion,,,,,,
+Acute bacterial sinusitis,,,Fever,,,,,,
+Acute bacterial sinusitis,,,Persistent cough (>10 days),,,,,,
+
+Acute gastroenteritis (infectious),,,Vomiting,,,,,,
+Acute gastroenteritis (infectious),,,Diarrhea,,,,,,
+Acute gastroenteritis (infectious),,,Abdominal pain,,,,,,
+Acute gastroenteritis (infectious),,,Decreased urination,,,,,,
+Acute gastroenteritis (infectious),,,Signs of dehydration,,,,,,
+
+Urinary tract infection,,,Fever,,,,,,
+Urinary tract infection,,,Dysuria (painful urination),,,,,,
+Urinary tract infection,,,Urinary frequency,,,,,,
+Urinary tract infection,,,Urinary urgency,,,,,,
+Urinary tract infection,,,Abdominal/suprapubic pain,,,,,,
+
+Conjunctivitis,,,Eye redness,,,,,,
+Conjunctivitis,,,Eye discharge,,,,,,
+Conjunctivitis,,,Itchy eyes,,,,,,
+Conjunctivitis,,,Eyelids stuck shut on waking,,,,,,
+
+Hand, foot and mouth disease,,,Oral ulcers,,,,,,
+Hand, foot and mouth disease,,,Vesicular rash on hands,,,,,,
+Hand, foot and mouth disease,,,Vesicular rash on feet,,,,,,
+Hand, foot and mouth disease,,,Fever,,,,,,
+
+Atopic dermatitis (eczema),,,Pruritus (itching),,,,,,
+Atopic dermatitis (eczema),,,Eczematous rash,,,,,,
+Atopic dermatitis (eczema),,,Xerosis (dry skin),,,,,,
+Atopic dermatitis (eczema),,,Flexural involvement,,,,,,
+
+Impetigo,,,Honey-colored crusts,,,,,,
+Impetigo,,,Erythema (redness),,,,,,
+Impetigo,,,Pruritus (itching),,,,,,
+
+Fifth disease (erythema infectiosum),,,Facial rash (slapped-cheek),,,,,,
+Fifth disease (erythema infectiosum),,,Lacy reticular rash (trunk),,,,,,
+Fifth disease (erythema infectiosum),,,Low-grade fever,,,,,,
+
+Roseola infantum (exanthema subitum),,,High fever (3-5 days),,,,,,
+Roseola infantum (exanthema subitum),,,Maculopapular rash (after fever resolves),,,,,,
+
+Varicella (chickenpox),,,Pruritic vesicular rash,,,,,,
+Varicella (chickenpox),,,Lesions in different stages,,,,,,
+Varicella (chickenpox),,,Fever,,,,,,
+
+Otitis externa (swimmer's ear),,,Ear pain (worse with tragal pressure),,,,,,
+Otitis externa (swimmer's ear),,,Ear canal edema/erythema,,,,,,
+Otitis externa (swimmer's ear),,,Otorrhea (ear discharge),,,,,,
+
+Allergic rhinitis,,,Sneezing,,,,,,
+Allergic rhinitis,,,Rhinorrhea (runny nose),,,,,,
+Allergic rhinitis,,,Nasal congestion,,,,,,
+Allergic rhinitis,,,Itchy eyes,,,,,,
