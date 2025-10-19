@@ -114,19 +114,6 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
 
 Curated clinical evidence underlying the starter CSVs was compiled from general pediatric references; as we expand, each row should include specific provenance (`source_pmid`, `guideline_org`, `year`, `study_design`, `evidence_grade`).
 
-## GitHub Preparation
-- A `.gitignore` is included to exclude local DBs, caches, and large/raw CSVs. Only templates and curated CSV inputs are tracked.
-- Suggested initial commit workflow:
-```bash
-git init
-git add -A
-git commit -m "Initial cleaned repo: ontology schema, loaders, inference"
-# Optional: set main branch and push to your remote
-git branch -M main
-git remote add origin <your_repo_url>
-git push -u origin main
-```
-
 ## Notes
 - This repository is for research/prototyping only and is **not** a clinical decision aid.
 - Please review and validate evidence and outputs with qualified domain experts before any real-world use.
