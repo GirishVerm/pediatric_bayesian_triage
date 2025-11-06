@@ -372,16 +372,13 @@ def main():
         choice = input(f"\nChoose symptom 1-{len(next_syms)} that the child HAS (or '0' for none, 's' to skip, 'q' to quit): ")
         if choice.lower() == 'q':
             break
-        if choice == '0' or choice.lower() in ('none', 'n'):
-            # Mark all proposed as asked and continue
+        if choice.lower() == 's':
+            # Skip: just mark symptoms as asked and show new options (don't count as low gain)
             for sym in next_syms:
                 asked.add(sym)
-            consecutive_low_gain += 1
-            if consecutive_low_gain >= 2:
-                print("\nInsufficient progress. Finalizing.")
-                break
             continue
-        if choice.lower() == 's':
+        if choice == '0' or choice.lower() in ('none', 'n'):
+            # Mark all proposed as asked and continue (counts as low gain since no symptom selected)
             for sym in next_syms:
                 asked.add(sym)
             consecutive_low_gain += 1

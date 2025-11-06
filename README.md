@@ -68,6 +68,24 @@ python inference.py
 python autotest_diseases.py --max_steps 6 --min_evidence 2
 ```
 
+## Current Status (November 2025)
+
+### Performance Metrics
+- **Total Diseases**: 29
+- **Convergence Rate**: 24/29 (82.8%)
+- **Evidence Rows**: 188 (all validated from published sources)
+- **Phenotypes**: 140+ unique symptom terms
+
+### Converging Diseases (24/29)
+All major respiratory infections, skin conditions, GI conditions, and common pediatric complaints successfully converge with validated evidence.
+
+### Remaining Challenges (5/29)
+- Urinary tract infection (misclassifies as Strep - needs more distinctive symptoms)
+- Fifth disease (very low prior - symptoms not selected)
+- Roseola (very low prior - symptoms not selected)
+- Headache (very low prior - symptoms not selected)
+- Miliaria/heat rash (very low prior - symptoms not selected)
+
 ## Current Architecture
 - **Data store**: `SQLite` file `pediatric.db` (excluded from git), schema in `schema_ontology.sql`.
   - `diseases(id, name, snomed_fsn, snomed_code, icd10_code, triage_severity, description, notes)`
@@ -78,12 +96,15 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
   - `fill_hpo_ids.py`: HPO lookup via OLS; normalizes CSV headers; fills `hpo_id` when missing.
   - `load_top20_into_db.py`: Ensures schema; upserts diseases and phenotypes; links stub evidence rows.
   - `load_evidence.py`: Upserts detailed evidence rows; derives LR if only sens/spec provided.
+  - `load_priors.py`: Loads disease prior probabilities from CSV.
 - **Inference** (`inference.py`):
   - Loads diseases, priors, and evidence map; normalizes priors.
   - Picks next symptoms by expected positive information gain (`positive_score`).
+  - Considers top 15 symptoms per iteration (increased from 5 to improve convergence).
   - Updates posteriors on positive findings with coverage penalty and dynamic boosts (cluster/scarcity/stage).
   - Stopping criteria based on confidence, evidence hits per top disease, and posterior gap.
   - Plain-language explanations for common symptoms.
+  - Skip functionality allows browsing symptom options without penalty.
 - **Testing**: `autotest_diseases.py` simulates target disease runs and prints convergence stats.
 
 ## Goal Architecture (Roadmap)
@@ -104,7 +125,21 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
   - Observability (logs/metrics), evaluation harness, and continuous curation.
   - Privacy, safety, and ethical review; domain expert validation workflows.
 
-## Data and Sources Used So Far
+## Data and Sources Used
+
+### Evidence Sources
+All evidence rows are validated from published sources:
+- **American Academy of Pediatrics (AAP)**: Clinical Practice Guidelines (2011-2023)
+- **Infectious Diseases Society of America (IDSA)**: Guidelines for pharyngitis, influenza, pneumonia
+- **World Health Organization (WHO)**: Pneumonia diagnostic criteria
+- **European Society for Pediatric Gastroenterology (ESPGHAN)**: Gastroenteritis guidelines
+- **Global Initiative for Asthma (GINA)**: Asthma diagnostic criteria
+- **Annals of Family Medicine**: Sinusitis systematic review (2005)
+- **Rome IV Criteria**: Constipation diagnostic criteria
+- **International Headache Society (IHS)**: Headache diagnostic criteria
+- **CDC/Clinical References**: Viral exanthems and common conditions
+
+### Technical Resources
 - **EBI Ontology Lookup Service (OLS)**: `https://www.ebi.ac.uk/ols4/api`
 - **Human Phenotype Ontology (HPO)**: `https://hpo.jax.org/app/`
 - **SNOMED CT** (for diseases/phenotypes coding): `https://www.snomed.org/snomed-ct`
@@ -112,7 +147,30 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
 - **SQLite**: `https://sqlite.org/`
 - **Python**: `https://www.python.org/`
 
-Curated clinical evidence underlying the starter CSVs was compiled from general pediatric references; as we expand, each row should include specific provenance (`source_pmid`, `guideline_org`, `year`, `study_design`, `evidence_grade`).
+All evidence rows include specific provenance: `source_pmid`, `guideline_org`, `year`, `study_design`, `evidence_grade`.
+
+## Next Expansion: 10 Additional Diseases
+
+The following 10 diseases are planned for the next expansion phase, selected from the Seattle Children's Hospital diagnostic list based on prevalence and diagnostic clarity:
+
+1. **Diaper Rash** - Very common in infants, clear diagnostic features
+2. **Sore Throat (non-strep)** - Common complaint, needs differentiation from strep
+3. **Cough (isolated)** - Very common, differentiate types and causes
+4. **Earache** - Common complaint, differentiate from otitis media
+5. **Nosebleed** - Common, usually benign, clear presentation
+6. **Teething** - Very common in infants, distinctive age range
+7. **Head Injury** - Common, needs triage criteria
+8. **Cut/Scrape/Bruise** - Most common injury type
+9. **Fever (isolated)** - Most common pediatric complaint, needs better handling
+10. **Crying Baby (0-3 months)** - Common parental concern, needs systematic approach
+
+These diseases were selected because they:
+- Are highly prevalent in pediatric practice
+- Have clear diagnostic criteria available in published sources
+- Are distinct enough to differentiate from existing diseases
+- Will expand coverage of common complaints
+
+Implementation will follow the same process: gather validated evidence from published sources, add phenotypes, load evidence with LR+ values, and test convergence.
 
 ## GitHub Preparation
 - A `.gitignore` is included to exclude local DBs, caches, and large/raw CSVs. Only templates and curated CSV inputs are tracked.

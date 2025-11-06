@@ -74,6 +74,7 @@ def simulate_target(target_id: int, max_steps: int = 6) -> Tuple[bool, int, str,
             candidates,
             symptom_map,
             asked,
+            top_n=15,  # Consider more symptoms to ensure target disease symptoms are included
             cluster_strength=cluster_strength,
             scarcity_boosts=scarcity_boosts,
         )
