@@ -26,8 +26,8 @@ def count_evidence_symptoms_for_disease(symptom_map: dict, disease_id: int) -> i
     return count
 
 
-def list_disease_symptoms():
-    diseases, _priors, symptom_map = load_data()
+def list_disease_symptoms(db_path: str = "pediatric.db"):
+    diseases, _priors, symptom_map = load_data(db_path)
     print("Disease | Evidence-backed symptoms (pos LR)")
     for did, info in diseases.items():
         syms = [s for s, dm in symptom_map.items() if did in dm and dm[did].get("lr_pos") is not None]
@@ -47,8 +47,8 @@ def pick_target_symptom(next_syms: List[str], target_id: int, symptom_map: dict)
     return best_sym
 
 
-def simulate_target(target_id: int, max_steps: int = 6) -> Tuple[bool, int, str, float, int, int]:
-    diseases, priors, symptom_map = load_data()
+def simulate_target(target_id: int, max_steps: int = 6, db_path: str = "pediatric.db") -> Tuple[bool, int, str, float, int, int]:
+    diseases, priors, symptom_map = load_data(db_path)
 
     candidates = dict(priors)
     asked = set()
@@ -120,13 +120,14 @@ def main():
     parser.add_argument("--min_evidence", type=int, default=2, help="Skip diseases with fewer than this many evidence-backed symptoms")
     parser.add_argument("--only", type=str, default="", help="Comma-separated disease names to test")
     parser.add_argument("--list", action="store_true", help="List each disease with its evidence-backed symptoms and exit")
+    parser.add_argument("--db", type=str, default="pediatric.db", help="Database file path")
     args = parser.parse_args()
 
     if args.list:
-        list_disease_symptoms()
+        list_disease_symptoms(args.db)
         return
 
-    diseases, _priors, symptom_map = load_data()
+    diseases, _priors, symptom_map = load_data(args.db)
     name_to_id = {info["name"].lower(): did for did, info in diseases.items()}
 
     targets = []
@@ -148,7 +149,7 @@ def main():
         if n_evid < args.min_evidence:
             continue
         tested += 1
-        finalized, steps, top_name, top_p, hits, req = simulate_target(did, args.max_steps)
+        finalized, steps, top_name, top_p, hits, req = simulate_target(did, args.max_steps, db_path=args.db)
         success = finalized and steps <= args.max_steps
         if success:
             successes += 1

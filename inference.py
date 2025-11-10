@@ -88,6 +88,33 @@ LAY_EXPLANATIONS = {
     "Ear pain (worse with tragal pressure)": "Ear hurts when you press the small flap in front of the ear.",
     "Sneezing": "Sudden air bursts through nose/mouth.",
     "Itchy eyes": "Eyes that feel itchy or irritated.",
+    # New symptoms from latest database additions
+    "Pancytopenia": "Low counts of all blood cell types (red cells, white cells, platelets).",
+    "Bone marrow failure": "Bone marrow stops making enough blood cells.",
+    "Cardiomegaly": "Enlarged heart, seen on imaging.",
+    "Arrhythmias": "Irregular or abnormal heart rhythm.",
+    "Lymphoblasts on peripheral smear": "Immature white blood cells seen in blood test (indicates leukemia).",
+    "Myeloblasts on peripheral smear": "Immature blood cells seen in blood test (indicates leukemia).",
+    "Auer rods": "Rod-shaped structures in blood cells (specific to certain leukemias).",
+    "Papilledema": "Swelling of the optic nerve at the back of the eye (seen by eye doctor).",
+    "Focal neurological signs": "Specific problems like weakness on one side, vision loss, or coordination issues.",
+    "Gallop rhythm": "Extra heart sound heard by doctor, like a galloping horse.",
+    "Reed-Sternberg cells": "Abnormal cells seen in biopsy (diagnostic of Hodgkin lymphoma).",
+    "B symptoms": "Fever, night sweats, or weight loss (associated with lymphomas).",
+    "Leukocoria (white pupil)": "White reflection in the pupil instead of red (emergency - see doctor immediately).",
+    "Currant jelly stool": "Stool that looks like red jelly mixed with mucus (emergency - see doctor immediately).",
+    "Increased head circumference": "Head growing faster than normal for age (measured by doctor).",
+    "Bulging fontanelle": "Soft spot on baby's head is raised or bulging (emergency - see doctor immediately).",
+    "Sunsetting eyes": "Eyes appear to look downward, showing white above the iris (sign of increased brain pressure).",
+    "Inattention": "Difficulty paying attention, easily distracted, forgetful.",
+    "Hyperactivity": "Excessive movement, fidgeting, difficulty sitting still.",
+    "Impulsivity": "Acting without thinking, interrupting others, difficulty waiting turn.",
+    "Social communication deficits": "Difficulty with social interactions, making friends, understanding social cues.",
+    "Repetitive behaviors": "Repeating actions, words, or movements over and over.",
+    "Restricted interests": "Very focused on specific topics or activities, limited range of interests.",
+    "Obsessions": "Repeated, unwanted thoughts that cause anxiety or distress.",
+    "Compulsions": "Repetitive behaviors or mental acts that feel necessary to perform.",
+    "Time-consuming rituals": "Repetitive behaviors that take a lot of time and interfere with daily life.",
 }
 
 CLUSTERS = ["respiratory", "ent", "gi", "gu", "skin", "eye", "general"]
@@ -304,10 +331,11 @@ def preview_recommendations(diseases, priors, symptom_map, top_n=10):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--preview", type=int, default=0, help="Show top-N recommended symptoms and exit")
+    parser.add_argument("--db", type=str, default="pediatric.db", help="Database file path")
     args = parser.parse_args()
 
     try:
-        diseases, priors, symptom_map = load_data()
+        diseases, priors, symptom_map = load_data(args.db)
     except sqlite3.OperationalError as e:
         print(f"Error loading database: {e}")
         sys.exit(1)
