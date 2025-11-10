@@ -62,7 +62,8 @@ def upsert_evidence(conn: sqlite3.Connection, disease_id: int, phenotype_id: int
         cur.execute(
             """
             UPDATE disease_phenotype_evidence
-            SET sensitivity=?, specificity=?, lr_pos=?, lr_neg=?, source_pmid=?, guideline_org=?, year=?, study_design=?, evidence_grade=?, extraction_date=?, notes=?
+            SET sensitivity=?, specificity=?, lr_pos=?, lr_neg=?, source_pmid=?, guideline_org=?, year=?, study_design=?, evidence_grade=?, extraction_date=?, notes=?,
+                citation_page=?, citation_table=?, citation_figure=?, citation_section=?, citation_doi=?, citation_url=?, citation_authors=?, citation_journal=?, citation_volume=?, citation_issue=?, citation_full_reference=?, citation_data_location=?
             WHERE id=?
             """,
             (
@@ -77,6 +78,18 @@ def upsert_evidence(conn: sqlite3.Connection, disease_id: int, phenotype_id: int
                 (row.get("evidence_grade") or None),
                 (row.get("extraction_date") or None),
                 (row.get("notes") or None),
+                (row.get("citation_page") or None),
+                (row.get("citation_table") or None),
+                (row.get("citation_figure") or None),
+                (row.get("citation_section") or None),
+                (row.get("citation_doi") or None),
+                (row.get("citation_url") or None),
+                (row.get("citation_authors") or None),
+                (row.get("citation_journal") or None),
+                (row.get("citation_volume") or None),
+                (row.get("citation_issue") or None),
+                (row.get("citation_full_reference") or None),
+                (row.get("citation_data_location") or None),
                 eid,
             ),
         )
@@ -85,8 +98,9 @@ def upsert_evidence(conn: sqlite3.Connection, disease_id: int, phenotype_id: int
             """
             INSERT INTO disease_phenotype_evidence(
               disease_id, phenotype_id, age_min_months, age_max_months, setting, region,
-              sensitivity, specificity, lr_pos, lr_neg, source_pmid, guideline_org, year, study_design, evidence_grade, extraction_date, notes
-            ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+              sensitivity, specificity, lr_pos, lr_neg, source_pmid, guideline_org, year, study_design, evidence_grade, extraction_date, notes,
+              citation_page, citation_table, citation_figure, citation_section, citation_doi, citation_url, citation_authors, citation_journal, citation_volume, citation_issue, citation_full_reference, citation_data_location
+            ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (
                 disease_id,
@@ -106,6 +120,18 @@ def upsert_evidence(conn: sqlite3.Connection, disease_id: int, phenotype_id: int
                 (row.get("evidence_grade") or None),
                 (row.get("extraction_date") or None),
                 (row.get("notes") or None),
+                (row.get("citation_page") or None),
+                (row.get("citation_table") or None),
+                (row.get("citation_figure") or None),
+                (row.get("citation_section") or None),
+                (row.get("citation_doi") or None),
+                (row.get("citation_url") or None),
+                (row.get("citation_authors") or None),
+                (row.get("citation_journal") or None),
+                (row.get("citation_volume") or None),
+                (row.get("citation_issue") or None),
+                (row.get("citation_full_reference") or None),
+                (row.get("citation_data_location") or None),
             ),
         )
 

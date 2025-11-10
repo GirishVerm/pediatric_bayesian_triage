@@ -44,6 +44,19 @@ CREATE TABLE IF NOT EXISTS disease_phenotype_evidence (
   prevalence REAL,
   extraction_date TEXT,
   notes TEXT,
+  -- Detailed academic citation fields
+  citation_page TEXT,
+  citation_table TEXT,
+  citation_figure TEXT,
+  citation_section TEXT,
+  citation_doi TEXT,
+  citation_url TEXT,
+  citation_authors TEXT,
+  citation_journal TEXT,
+  citation_volume TEXT,
+  citation_issue TEXT,
+  citation_full_reference TEXT,
+  citation_data_location TEXT, -- e.g., "Table 2, row 3" or "Figure 1, panel B"
   UNIQUE(disease_id, phenotype_id, age_min_months, age_max_months, setting, region, source_pmid)
 );
 
