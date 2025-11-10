@@ -16,8 +16,9 @@ ENV/
 .AppleDouble
 .LSOverride
 
-# SQLite databases
+# SQLite databases (but track the main pediatric.db)
 *.db
+!pediatric.db
 *.sqlite
 *.sqlite3
 

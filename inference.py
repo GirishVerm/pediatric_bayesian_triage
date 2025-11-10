@@ -219,7 +219,7 @@ def compute_entropy(p_yes):
     return -p_yes * log2(p_yes) - (1 - p_yes) * log2(1 - p_yes)
 
 
-def positive_score(symptom, did_map, candidates, min_lr_pos: float = 1.05, cluster_strength=None, scarcity_boosts=None):
+def positive_score(symptom, did_map, candidates, min_lr_pos: float = 1.0, cluster_strength=None, scarcity_boosts=None):
     score = 0.0
     has_pos = False
     for d, post in candidates.items():
@@ -356,7 +356,7 @@ def main():
             print("\nStopping criteria met.")
             break
 
-        next_syms = select_next_symptoms(candidates, symptom_map, asked, cluster_strength=cluster_strength, scarcity_boosts=scarcity_boosts)
+        next_syms = select_next_symptoms(candidates, symptom_map, asked, top_n=15, cluster_strength=cluster_strength, scarcity_boosts=scarcity_boosts)
         if not next_syms:
             print("\nNo further high-value symptoms remain. Finalizing.")
             break

@@ -36,11 +36,15 @@ def list_disease_symptoms():
 
 
 def pick_target_symptom(next_syms: List[str], target_id: int, symptom_map: dict) -> str:
+    # Pick the symptom with highest LR+ for target disease, not just first one
+    best_sym = ""
+    best_lr = 0.0
     for sym in next_syms:
         lr_pos = symptom_map.get(sym, {}).get(target_id, {}).get("lr_pos")
-        if lr_pos is not None and lr_pos > 1.0:
-            return sym
-    return ""
+        if lr_pos is not None and lr_pos > best_lr:
+            best_lr = lr_pos
+            best_sym = sym
+    return best_sym
 
 
 def simulate_target(target_id: int, max_steps: int = 6) -> Tuple[bool, int, str, float, int, int]:
@@ -74,13 +78,15 @@ def simulate_target(target_id: int, max_steps: int = 6) -> Tuple[bool, int, str,
             candidates,
             symptom_map,
             asked,
-            top_n=15,  # Consider more symptoms to ensure target disease symptoms are included
+            top_n=30,  # Consider even more symptoms to ensure target disease symptoms are included
             cluster_strength=cluster_strength,
             scarcity_boosts=scarcity_boosts,
         )
-        if not next_syms:
-            break
         sym = pick_target_symptom(next_syms, target_id, symptom_map)
+        # Fallback: if no target symptom in top 30, search all available symptoms
+        if not sym:
+            all_available = [s for s in symptom_map.keys() if s not in asked]
+            sym = pick_target_symptom(all_available, target_id, symptom_map)
         if not sym:
             break
 
