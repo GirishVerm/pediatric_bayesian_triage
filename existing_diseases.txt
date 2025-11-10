@@ -1,0 +1,67 @@
+Acne
+Acute Lymphoblastic Leukemia
+Acute Myeloid Leukemia
+Acute bacterial sinusitis
+Acute gastroenteritis (infectious)
+Acute otitis media
+Acute upper respiratory infection (common cold)
+Allergic rhinitis
+Anxiety
+Aplastic Anemia
+Appendicitis
+Arrhythmia
+Asthma exacerbation
+Atopic dermatitis (eczema)
+Attention Deficit Hyperactivity Disorder
+Autism Spectrum Disorder (ASD)
+Brain Tumors
+Bronchiolitis
+Cardiomyopathy
+Community-acquired pneumonia
+Concussion
+Congenital Adrenal Hyperplasia
+Conjunctivitis
+Constipation
+Crohn's Disease
+Croup (laryngotracheobronchitis)
+Cystic Fibrosis
+Depression
+Diabetes
+Endocarditis
+Epilepsy
+Fifth disease (erythema infectiosum)
+Gallstones
+Gastroesophageal reflux (infants)
+Hand-foot-and-mouth disease
+Head Lice
+Heart Failure
+Hemophilia
+Hodgkin Lymphoma
+Hydrocephalus
+Impetigo
+Inflammatory Bowel Disease
+Influenza
+Intussusception
+Kawasaki Disease
+Miliaria (heat rash)
+Myocarditis
+Neuroblastoma
+Non-Hodgkin Lymphoma
+Obsessive Compulsive Disorder
+Otitis externa (swimmer's ear)
+Pancreatitis
+Pericarditis
+Pinworms
+Retinoblastoma
+Roseola infantum (exanthema subitum)
+Sickle Cell Disease
+Streptococcal pharyngitis
+Thrush
+Tinea corporis (ringworm)
+Ulcerative Colitis
+Urinary tract infection
+Urticaria (hives)
+Varicella (chickenpox)
+Viral Hepatitis
+Viral pharyngitis (non-strep)
+Warts

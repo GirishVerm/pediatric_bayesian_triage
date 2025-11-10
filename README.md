@@ -19,7 +19,7 @@ A lightweight, ontology-backed pediatric disease diagnosis assistant. It ingests
 - **`top20_disease_phenotypes.csv`**: Curated starter dataset of disease–phenotype pairs (without HPO). Use `fill_hpo_ids.py` to create an HPO-enriched file.
 - **`requirements.txt`**: External Python dependency pinning.
 
-Note: The main database file (`pediatric_best_64_67.db`) is tracked in version control to preserve the well-performing model (64/66 convergence). Backup databases are excluded.
+Note: The main database file (`pediatric.db`) is tracked in version control to preserve the well-performing model (86/87 convergence). Backup databases are excluded.
 
 ## Quick Start
 
@@ -68,17 +68,17 @@ python inference.py
 python autotest_diseases.py --max_steps 6 --min_evidence 2
 ```
 
-## Current Status (January 2025)
+## Current Status (November 2025)
 
 ### Performance Metrics
-- **Total Diseases**: 67 (merged from original 47 + 20 new diagnosable diseases)
-- **Convergence Rate**: 64/66 (97.0%) - 2 diseases skipped due to insufficient evidence
-- **Evidence Rows**: 323 (all validated from published sources with PMIDs and detailed citations)
-- **Phenotypes**: 480 unique symptom terms
+- **Total Diseases**: 87 (merged from original 67 + 20 new diagnosable diseases)
+- **Convergence Rate**: 86/87 (98.9%) - 1 disease skipped due to insufficient evidence
+- **Evidence Rows**: 760 (all validated from published sources with PMIDs and detailed citations)
+- **Phenotypes**: 554 unique symptom terms
 - **Published Sources**: Multiple guideline organizations (AAP, AHA, IDSA, ISPAD, ILAE, CDC, ECCO, CF Foundation, etc.)
-- **Database**: `pediatric_best_64_67.db` - Best performing model preserved in version control
+- **Database**: `pediatric.db` - Best performing model preserved in version control
 
-### Converging Diseases (64/66)
+### Converging Diseases (86/87)
 
 **Original 26 Diseases:**
 
@@ -150,14 +150,12 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
 62. Obsessive Compulsive Disorder
 63. Retinoblastoma
 
-### Remaining Challenges (2/66)
+### Remaining Challenges (1/87)
 
-**Gastroesophageal reflux (infants)**: Does not finalize - needs additional distinctive evidence in merged context.
-
-**Crohn's Disease**: Does not finalize - needs additional distinctive evidence to differentiate from other inflammatory bowel conditions.
+**1 disease skipped** due to insufficient evidence-backed symptoms (requires at least 2 evidence entries with LR+ values).
 
 ## Current Architecture
-- **Data store**: `SQLite` file `pediatric_best_64_67.db` (tracked in git to preserve best model), schema in `schema_ontology.sql`. The merged database combines 47 original diseases with 20 new diagnosable diseases for a total of 67 diseases, schema in `schema_ontology.sql`.
+- **Data store**: `SQLite` file `pediatric.db` (tracked in git to preserve best model), schema in `schema_ontology.sql`. The merged database combines 67 original diseases with 20 new diagnosable diseases for a total of 87 diseases, schema in `schema_ontology.sql`.
   - `diseases(id, name, snomed_fsn, snomed_code, icd10_code, triage_severity, description, notes)`
   - `phenotypes(id, name, type, snomed_code, hpo_code, loinc_code)`
   - `disease_phenotype_evidence(...)`: age ranges, setting/region, source metadata, sens/spec, LR+, LR−, notes.
@@ -273,31 +271,8 @@ Positive likelihood ratios (LR+) are determined by:
 - Notes field documents the specific source and context
 - Low-quality or estimated values are excluded in favor of published, validated data
 
-## Next Expansion: 10 Additional Diseases
-
-The following 10 diseases are planned for the next expansion phase, selected from the Seattle Children's Hospital diagnostic list based on prevalence and diagnostic clarity:
-
-1. **Diaper Rash** - Very common in infants, clear diagnostic features
-2. **Sore Throat (non-strep)** - Common complaint, needs differentiation from strep
-3. **Cough (isolated)** - Very common, differentiate types and causes
-4. **Earache** - Common complaint, differentiate from otitis media
-5. **Nosebleed** - Common, usually benign, clear presentation
-6. **Teething** - Very common in infants, distinctive age range
-7. **Head Injury** - Common, needs triage criteria
-8. **Cut/Scrape/Bruise** - Most common injury type
-9. **Fever (isolated)** - Most common pediatric complaint, needs better handling
-10. **Crying Baby (0-3 months)** - Common parental concern, needs systematic approach
-
-These diseases were selected because they:
-- Are highly prevalent in pediatric practice
-- Have clear diagnostic criteria available in published sources
-- Are distinct enough to differentiate from existing diseases
-- Will expand coverage of common complaints
-
-Implementation will follow the same process: gather validated evidence from published sources, add phenotypes, load evidence with LR+ values, and test convergence.
-
 ## GitHub Preparation
-- A `.gitignore` is included to exclude backup DBs, caches, and large/raw CSVs. The main `pediatric_best_64_67.db` is tracked to preserve the well-performing model (64/66 convergence).
+- A `.gitignore` is included to exclude backup DBs, caches, and large/raw CSVs. The main `pediatric.db` is tracked to preserve the well-performing model (86/87 convergence).
 - Suggested initial commit workflow:
 ```bash
 git init
