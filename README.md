@@ -19,7 +19,7 @@ A lightweight, ontology-backed pediatric disease diagnosis assistant. It ingests
 - **`top20_disease_phenotypes.csv`**: Curated starter dataset of disease–phenotype pairs (without HPO). Use `fill_hpo_ids.py` to create an HPO-enriched file.
 - **`requirements.txt`**: External Python dependency pinning.
 
-Note: The main database file (`pediatric.db`) is tracked in version control to preserve the well-performing model (86/87 convergence). Backup databases are excluded.
+Note: The main database file (`pediatric.db`) is tracked in version control to preserve the well-performing model (105/106 convergence). Backup databases are excluded.
 
 ## Quick Start
 
@@ -71,14 +71,14 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
 ## Current Status (November 2025)
 
 ### Performance Metrics
-- **Total Diseases**: 87 (merged from original 67 + 20 new diagnosable diseases)
-- **Convergence Rate**: 86/87 (98.9%) - 1 disease skipped due to insufficient evidence
-- **Evidence Rows**: 760 (all validated from published sources with PMIDs and detailed citations)
-- **Phenotypes**: 554 unique symptom terms
+- **Total Diseases**: 106 (merged from original 87 + 19 new diagnosable diseases)
+- **Convergence Rate**: 105/106 (99.1%) - 1 disease skipped due to insufficient evidence
+- **Evidence Rows**: 912 (all validated from published sources with PMIDs and detailed citations)
+- **Phenotypes**: 660 unique symptom terms
 - **Published Sources**: Multiple guideline organizations (AAP, AHA, IDSA, ISPAD, ILAE, CDC, ECCO, CF Foundation, etc.)
 - **Database**: `pediatric.db` - Best performing model preserved in version control
 
-### Converging Diseases (86/87)
+### Converging Diseases (105/106)
 
 **Original 26 Diseases:**
 
@@ -150,12 +150,52 @@ python autotest_diseases.py --max_steps 6 --min_evidence 2
 62. Obsessive Compulsive Disorder
 63. Retinoblastoma
 
-### Remaining Challenges (1/87)
+**New 19 Diseases (from third merge):**
+64. Stroke
+65. Multiple Sclerosis (MS)
+66. Neurofibromatosis
+67. Spina Bifida
+68. Spinal Muscular Atrophy
+69. Tuberous Sclerosis Complex (TSC)
+70. Kidney Failure
+71. Liver Failure
+72. Thalassemia
+73. Von Willebrand Disease
+74. Neutropenia
+75. Hereditary Spherocytosis
+76. Thyroid Conditions
+77. Pulmonary Hypertension
+78. Tetralogy of Fallot
+79. Patent Ductus Arteriosus
+80. Marfan Syndrome
+81. Hirschsprung Disease
+82. Necrotizing Enterocolitis
+83. Rheumatic Heart Disease
+84. Coarctation of the Aorta
+85. Interrupted Aortic Arch
+86. Double-Inlet Left Ventricle
+87. Double-Outlet Right Ventricle
+88. Total Anomalous Pulmonary Venous Return
+89. Transposition of the Great Arteries
+90. Truncus Arteriosus
+91. Cyanotic Heart Disease
+92. Vascular Rings
+93. Mitral Valve Abnormalities
+94. Supraventricular Tachycardia
+95. Diamond-Blackfan Anemia
+96. Dyskeratosis Congenita
+97. Hereditary Hemorrhagic Telangiectasia
+98. Kasabach-Merritt Phenomenon
+99. Langerhans Cell Histiocytosis
+100. MOG Antibody Disease
+101. Moyamoya
+
+### Remaining Challenges (1/106)
 
 **1 disease skipped** due to insufficient evidence-backed symptoms (requires at least 2 evidence entries with LR+ values).
 
 ## Current Architecture
-- **Data store**: `SQLite` file `pediatric.db` (tracked in git to preserve best model), schema in `schema_ontology.sql`. The merged database combines 67 original diseases with 20 new diagnosable diseases for a total of 87 diseases, schema in `schema_ontology.sql`.
+- **Data store**: `SQLite` file `pediatric.db` (tracked in git to preserve best model), schema in `schema_ontology.sql`. The merged database combines 87 original diseases with 19 new diagnosable diseases for a total of 106 diseases, schema in `schema_ontology.sql`.
   - `diseases(id, name, snomed_fsn, snomed_code, icd10_code, triage_severity, description, notes)`
   - `phenotypes(id, name, type, snomed_code, hpo_code, loinc_code)`
   - `disease_phenotype_evidence(...)`: age ranges, setting/region, source metadata, sens/spec, LR+, LR−, notes.
@@ -272,7 +312,7 @@ Positive likelihood ratios (LR+) are determined by:
 - Low-quality or estimated values are excluded in favor of published, validated data
 
 ## GitHub Preparation
-- A `.gitignore` is included to exclude backup DBs, caches, and large/raw CSVs. The main `pediatric.db` is tracked to preserve the well-performing model (86/87 convergence).
+- A `.gitignore` is included to exclude backup DBs, caches, and large/raw CSVs. The main `pediatric.db` is tracked to preserve the well-performing model (105/106 convergence).
 - Suggested initial commit workflow:
 ```bash
 git init

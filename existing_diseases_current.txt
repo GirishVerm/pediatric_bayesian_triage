@@ -1,0 +1,87 @@
+Acne
+Acute Lymphoblastic Leukemia
+Acute Myeloid Leukemia
+Acute bacterial sinusitis
+Acute gastroenteritis (infectious)
+Acute otitis media
+Acute upper respiratory infection (common cold)
+Allergic rhinitis
+Anxiety
+Aplastic Anemia
+Appendicitis
+Arrhythmia
+Asthma exacerbation
+Atopic dermatitis (eczema)
+Attention Deficit Hyperactivity Disorder
+Autism Spectrum Disorder (ASD)
+Brain Tumors
+Bronchiolitis
+Cardiomyopathy
+Community-acquired pneumonia
+Concussion
+Congenital Adrenal Hyperplasia
+Conjunctivitis
+Constipation
+Crohn's Disease
+Croup (laryngotracheobronchitis)
+Cystic Fibrosis
+Depression
+Diabetes
+Endocarditis
+Epilepsy
+Fifth disease (erythema infectiosum)
+Gallstones
+Gastroesophageal reflux (infants)
+Hand-foot-and-mouth disease
+Head Lice
+Heart Failure
+Hemophilia
+Hereditary Spherocytosis
+Hirschsprung Disease
+Hodgkin Lymphoma
+Hydrocephalus
+Immune Thrombocytopenia
+Impetigo
+Inflammatory Bowel Disease
+Influenza
+Intussusception
+Kawasaki Disease
+Kidney Failure
+Liver Failure
+Marfan Syndrome
+Miliaria (heat rash)
+Multiple Sclerosis (MS)
+Myocarditis
+Necrotizing Enterocolitis
+Neuroblastoma
+Neurofibromatosis
+Neutropenia
+Non-Hodgkin Lymphoma
+Obsessive Compulsive Disorder
+Otitis externa (swimmer's ear)
+Pancreatitis
+Patent Ductus Arteriosus
+Pericarditis
+Pinworms
+Pulmonary Hypertension
+Retinoblastoma
+Roseola infantum (exanthema subitum)
+Sickle Cell Disease
+Spina Bifida
+Spinal Muscular Atrophy
+Streptococcal pharyngitis
+Stroke
+Tetralogy of Fallot
+Thalassemia
+Thrush
+Thyroid Conditions
+Tinea corporis (ringworm)
+Tuberous Sclerosis Complex (TSC)
+Ulcerative Colitis
+Urinary tract infection
+Urticaria (hives)
+Varicella (chickenpox)
+Viral Hepatitis
+Viral pharyngitis (non-strep)
+Von Willebrand Disease
+Warts
