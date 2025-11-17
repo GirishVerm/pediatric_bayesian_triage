@@ -11,7 +11,21 @@ from pathlib import Path
 from collections import defaultdict
 
 # Add parent directory to path to import inference module
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Handle PyInstaller executable case
+if getattr(sys, 'frozen', False):
+    # Running as compiled executable
+    # sys._MEIPASS is the temporary directory where PyInstaller extracts files
+    base_path = sys._MEIPASS
+    # Try to add parent directory if we can determine it
+    if hasattr(sys, 'executable'):
+        exe_dir = os.path.dirname(sys.executable)
+        parent_dir = os.path.dirname(exe_dir) if os.path.basename(exe_dir).endswith('.app') else exe_dir
+        if os.path.exists(parent_dir):
+            sys.path.insert(0, parent_dir)
+    sys.path.insert(0, base_path)
+else:
+    # Running as script
+    sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     import customtkinter as ctk
@@ -105,14 +119,21 @@ class DiagnosticApp(ctk.CTk):
     def load_data(self):
         """Load disease data from database"""
         try:
-            # Try relative path first (parent directory)
-            db_relative = os.path.join(os.path.dirname(os.path.dirname(__file__)), self.db_path)
-            if os.path.exists(db_relative):
-                self.diseases, self.priors, self.symptom_map = load_data(db_relative)
-            elif os.path.exists(self.db_path):
+            # Handle PyInstaller executable case
+            if getattr(sys, 'frozen', False):
+                # Running as compiled executable - let load_data() handle path resolution
+                # It will check sys._MEIPASS and other locations
                 self.diseases, self.priors, self.symptom_map = load_data(self.db_path)
             else:
-                raise FileNotFoundError(f"Database not found: {self.db_path}")
+                # Running as script - try relative paths
+                db_relative = os.path.join(os.path.dirname(os.path.dirname(__file__)), self.db_path)
+                if os.path.exists(db_relative):
+                    self.diseases, self.priors, self.symptom_map = load_data(db_relative)
+                elif os.path.exists(self.db_path):
+                    self.diseases, self.priors, self.symptom_map = load_data(self.db_path)
+                else:
+                    # Fallback: let load_data() try to find it
+                    self.diseases, self.priors, self.symptom_map = load_data(self.db_path)
             
             self.scarcity_boosts = compute_scarcity_boosts(self.symptom_map, list(self.diseases.keys()))
         except Exception as e:
@@ -718,12 +739,24 @@ class DiagnosticApp(ctk.CTk):
 
 def main():
     """Main entry point"""
-    parser = argparse.ArgumentParser(description="IATRO Frontend - Pediatric Diagnostic System")
-    parser.add_argument("--db", type=str, default="pediatric.db", help="Path to pediatric.db")
-    args = parser.parse_args()
-    
-    app = DiagnosticApp(db_path=args.db)
-    app.mainloop()
+    try:
+        parser = argparse.ArgumentParser(description="IATRO Frontend - Pediatric Diagnostic System")
+        parser.add_argument("--db", type=str, default="pediatric.db", help="Path to pediatric.db")
+        args = parser.parse_args()
+        
+        app = DiagnosticApp(db_path=args.db)
+        app.mainloop()
+    except Exception as e:
+        import traceback
+        error_msg = f"Fatal error: {e}\n{traceback.format_exc()}"
+        print(error_msg, file=sys.stderr)
+        # Try to show error dialog if GUI is available
+        try:
+            import tkinter.messagebox as mb
+            mb.showerror("IATRO Error", error_msg)
+        except:
+            pass
+        sys.exit(1)
 
 
 if __name__ == "__main__":
