@@ -3,6 +3,7 @@ import sqlite3
 from math import log2
 import math
 import sys
+import os
 from collections import defaultdict
 import argparse
 
@@ -505,6 +506,29 @@ def dynamic_required_hits(symptom_map: dict, disease_id: int) -> int:
 
 
 def load_data(db_path="pediatric.db"):
+    # Handle PyInstaller executable case
+    if getattr(sys, 'frozen', False):
+        # Running as compiled executable
+        base_dir = sys._MEIPASS
+        exe_dir = os.path.dirname(sys.executable)
+        
+        # Try multiple locations for database
+        possible_paths = [
+            os.path.join(base_dir, "pediatric.db"),  # Bundled with executable
+            os.path.join(exe_dir, "pediatric.db"),   # Same directory as executable
+            os.path.join(os.getcwd(), "pediatric.db"),  # Current working directory
+            db_path  # Original path
+        ]
+        
+        # Find first existing database
+        for path in possible_paths:
+            if os.path.exists(path):
+                db_path = path
+                break
+        else:
+            # If not found, use original path and let sqlite3 handle the error
+            pass
+    
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
 
