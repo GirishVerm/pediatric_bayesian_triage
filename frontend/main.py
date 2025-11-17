@@ -389,11 +389,30 @@ class DiagnosticApp(ctk.CTk):
         # Filter symptoms that match the query and haven't been asked yet
         filtered = [s for s in all_symptoms if query in s.lower() and s not in self.asked]
         
-        # Sort by relevance (exact matches first, then by position)
-        filtered.sort(key=lambda s: (not s.lower().startswith(query), s.lower().find(query), s.lower()))
+        # Calculate information gain for each symptom to prioritize diagnostically valuable ones
+        from inference import positive_score
+        symptom_scores = []
+        for symptom in filtered:
+            did_map = self.symptom_map.get(symptom, {})
+            gain = positive_score(
+                symptom, 
+                did_map, 
+                self.candidates,
+                cluster_strength=self.cluster_strength,
+                scarcity_boosts=self.scarcity_boosts
+            )
+            symptom_scores.append((symptom, gain))
+        
+        # Sort by information gain (highest first), then by exact match, then alphabetically
+        symptom_scores.sort(key=lambda x: (
+            -x[1],  # Negative for descending order (highest gain first)
+            not x[0].lower().startswith(query),  # Exact matches first
+            x[0].lower().find(query),  # Then by position in string
+            x[0].lower()  # Finally alphabetically
+        ))
         
         # Limit to top 20 results
-        filtered = filtered[:20]
+        filtered = [symptom for symptom, _ in symptom_scores[:20]]
         
         # Hide normal symptom scroll frame
         self.symptom_scroll_frame.pack_forget()

@@ -1,5 +1,5 @@
 ('/Users/girishverma/Documents/IATRO/frontend/build/IATRO_Frontend/IATRO_Frontend',
- True,
+ False,
  False,
  True,
  None,
@@ -54,8 +54,8 @@
  [],
  False,
  False,
- 1763398388,
- [('run',
-   '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/PyInstaller/bootloader/Darwin-64bit/run',
+ 1763400706,
+ [('runw',
+   '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/PyInstaller/bootloader/Darwin-64bit/runw',
    'EXECUTABLE')],
  '/Library/Frameworks/Python.framework/Versions/3.12/Python')
