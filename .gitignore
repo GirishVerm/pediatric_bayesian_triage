@@ -1,32 +1,26 @@
-# Python caches
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.egg-info/
-.eggs/
-
-# Virtual environments
-.venv/
+.Python
+env/
 venv/
-ENV/
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# SQLite databases (but track the main pediatric.db)
+.venv/
+build/
+dist/
+*.spec
+*.log
+*.sqlite
 *.db
 !pediatric.db
-*.sqlite
-*.sqlite3
-
-# Data dumps (keep templates)
-*.csv
-!evidence_template.csv
-!top20_disease_phenotypes.csv
-
-# Editor/IDE
-.vscode/
+.DS_Store
 .idea/
+.vscode/
+.cursor/
+*.egg-info/
+frontend/build/
+frontend/dist/
+frontend/__pycache__/
+frontend/*.spec
+chapters/
+appendices/

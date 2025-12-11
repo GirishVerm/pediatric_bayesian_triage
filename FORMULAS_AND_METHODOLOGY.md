@@ -168,11 +168,11 @@ new_p = new_odds / (1 + new_odds)
 
 | Parameter | Source | Formula? |
 |-----------|--------|----------|
-| **Sensitivity** | Published sources | ❌ No - extracted directly |
-| **Specificity** | Published sources | ❌ No - extracted directly |
-| **LR+** | Published OR calculated | ✅ Yes - LR+ = Sens / (1 - Spec) |
-| **LR-** | Calculated | ✅ Yes - LR- = (1 - Sens) / Spec |
-| **Priors** | Epidemiological data | ❌ No - prevalence rates (can be adjusted) |
+| **Sensitivity** | Published sources | No - extracted directly |
+| **Specificity** | Published sources | No - extracted directly |
+| **LR+** | Published OR calculated | Yes - LR+ = Sens / (1 - Spec) |
+| **LR-** | Calculated | Yes - LR- = (1 - Sens) / Spec |
+| **Priors** | Epidemiological data | No - prevalence rates (can be adjusted) |
 
 ### Mathematical Relationships
 
@@ -212,12 +212,12 @@ new_p = new_odds / (1 + new_odds)
 ## For Academic Review
 
 **Key Points:**
-1. ✅ All sensitivity/specificity values are from published sources
-2. ✅ LR+ values follow the standard formula: LR+ = Sens / (1 - Spec)
-3. ✅ LR- values follow the standard formula: LR- = (1 - Sens) / Spec
-4. ✅ Posterior updates use Bayes' Theorem (standard statistical method)
-5. ✅ Priors are based on disease prevalence (can be adjusted for model tuning)
-6. ✅ All values are traceable to published sources (PMID or guideline org)
+1. All sensitivity/specificity values are from published sources
+2. LR+ values follow the standard formula: LR+ = Sens / (1 - Spec)
+3. LR- values follow the standard formula: LR- = (1 - Sens) / Spec
+4. Posterior updates use Bayes' Theorem (standard statistical method)
+5. Priors are based on disease prevalence (can be adjusted for model tuning)
+6. All values are traceable to published sources (PMID or guideline org)
 
 **No arbitrary values** - all diagnostic parameters are either:
 - Extracted from published research, OR

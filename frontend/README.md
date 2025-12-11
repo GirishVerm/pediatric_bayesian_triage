@@ -22,4 +22,3 @@ python main.py
 ```
 
 Make sure `pediatric.db` is in the parent directory or specify path with `--db` argument.
-
